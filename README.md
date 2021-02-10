@@ -9,11 +9,26 @@ This patches:
 
 
 # How to use
-- Place a two files .patch and .config.sbt to your /Openwrt folder
-- Run patch
+For advanced users
+1. Place a two files .patch and .config.sbt to your /Openwrt folder
+2. Run patch
 $ patch -p1 < beeline_sbtpluslus_uart3_hsdma_2021-01-25.patch
-- Open configuration tool (make menuconfig)
-- Load '.config.sbt' configuration file
-- Save a default .config file
+3. Open configuration tool (make menuconfig)
+4. Load '.config.sbt' configuration file
+5. Save a .config file
+
+
+For others
+1. Download appropriate -factory.zip or -sysupgrade.bin firmware.
+2. Check partiton table on your router
+patrtition start size
+u-boot 0x0-0x100000, 
+SC PART_MAP 0x100000-0x100000,
+kernel 0x200000-0x400000,
+ubi 0x600000-0x7800000,
+factory 0x7e00000-0x100000
+
+3. Flash firmware.
+4. Reset to factory defaults.
 
 Enjoy :) 
