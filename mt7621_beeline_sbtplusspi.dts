@@ -1,0 +1,84 @@
+// SPDX-License-Identifier: GPL-2.0
+
+#include "mt7621_beeline_sbtplus.dtsi"
+
+/ {
+	compatible = "beeline,sbtplusspi", "mediatek,mt7621-soc";
+	model = "Smart Box Turbo+ SPI";
+};
+
+&spi0 {
+	status = "okay";
+
+	m25p80@0 {
+		compatible = "jedec,spi-nor";
+		reg = <0>;
+		spi-max-frequency = <40000000>;
+
+		partitions {
+			compatible = "fixed-partitions";
+			#address-cells = <1>;
+			#size-cells = <1>;
+
+			partition@0 {
+				label = "bootloader";
+				reg = <0x0 0x30000>;
+				read-only;
+			};
+
+			partition@30000 {
+				label = "config";
+				reg = <0x30000 0x10000>;
+				read-only;
+			};
+
+			factory: partition@40000 {
+				label = "factory";
+				reg = <0x40000 0x10000>;
+				read-only;
+			};
+
+			firmware: partition@50000 {
+				compatible = "denx,uimage";
+				label = "firmware";
+				reg = <0x50000 0xfb0000>;
+			};
+		};
+	};
+};
+
+&gmac0 {
+	mtd-mac-address = <&factory 0xb000>;
+};
+
+&switch0 {
+	ports {
+		port@0 {
+			status = "okay";
+			label = "wan";
+			mtd-mac-address = <&factory 0xb000>;
+			mac-address-increment = <2>;
+		};
+
+		port@1 {
+			status = "okay";
+			label = "lan1";
+		};
+
+		port@2 {
+			status = "okay";
+			label = "lan2";
+		};
+
+		port@3 {
+			status = "okay";
+			label = "lan3";
+		};
+
+		port@4 {
+			status = "okay";
+			label = "lan4";
+		};
+
+	};
+};
