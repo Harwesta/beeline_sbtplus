@@ -31,4 +31,9 @@ factory 0x7e00000-0x100000
 3. Flash firmware.
 4. Reset to factory defaults.
 
+Openwrt 22.03.2
+---------------
+1. Add support for QMI, NCM, MBIM modems with complete modeminfo, modem settings.
+2. Add Adblock, Atinout, Openvpn Wireguard client, OBFS-proxy etc.
+
 Enjoy :) 
